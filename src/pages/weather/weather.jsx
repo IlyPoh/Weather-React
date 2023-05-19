@@ -1,15 +1,20 @@
+// libraries
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+// components
 import { Button } from '/src/components/Button/Button';
 import { WeatherList } from '/src/components/WeatherList/WeatherList';
 import { Image } from '/src/components/Image/Image';
-import styles from './weather.module.scss';
-import { useEffect } from 'react';
 import { cityList } from '/src/utils/constants';
 import { getUserGeolocation } from '/src/helpers/helpers';
 import directionIcon from '/src/assets/images/icon-direction-pointer.svg';
 import pressureIcon from '/src/assets/images/icon-pressure.svg';
 import { ErrorBlock } from '/src/components/ErrorBlock/ErrorBlock';
 import { Loading } from '/src/components/Loading/Loading';
+
+// style
+import styles from './weather.module.scss';
 
 export const Weather = () => {
   const dispatch = useDispatch();

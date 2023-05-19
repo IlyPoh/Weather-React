@@ -1,4 +1,7 @@
+// libraries
 import { useSelector } from 'react-redux';
+
+// style
 import styles from './ErrorBlock.module.scss';
 
 export const ErrorBlock = () => {

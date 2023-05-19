@@ -1,8 +1,11 @@
+// libraries
 import axios from 'axios';
+
+// components
 import {
   fetchWeatherByCityURL,
   fetchWeatherByGeolocationURL,
-} from '../utils/config';
+} from '/src/utils/config';
 import { updateData } from '/src/helpers/helpers';
 
 export const UPDATE_CITY = 'UPDATE_CITY';

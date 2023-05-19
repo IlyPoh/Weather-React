@@ -1,6 +1,7 @@
+// components
 import { months, directions } from '/src/utils/constants';
 import { fetchCityByGeolocation, fetchCityByName } from '/src/store/actions';
-import { handleErrorMessage } from '../store/actions';
+import { handleErrorMessage } from '/src/store/actions';
 
 export const getUserGeolocation = (dispatch, cityList) => {
   navigator.geolocation.getCurrentPosition(

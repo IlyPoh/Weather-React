@@ -1,5 +1,7 @@
-/* eslint-disable react/prop-types */
+// libraries
 import classNames from 'classnames';
+
+// style
 import styles from './Button.module.scss';
 
 export const Button = ({ text, classes, ...props }) => {

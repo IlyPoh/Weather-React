@@ -1,8 +1,13 @@
+// libraries
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+// components
 import { cityList } from '/src/utils/constants';
-import styles from './WeatherList.module.scss';
 import { fetchCityByName } from '/src/store/actions';
+
+// style
+import styles from './WeatherList.module.scss';
 
 export const WeatherList = () => {
   const dispatch = useDispatch();
