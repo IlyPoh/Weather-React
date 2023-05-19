@@ -1,9 +1,13 @@
 import { useState } from 'react';
-import { cityList } from '../../utils/config';
+import { useDispatch, useSelector } from 'react-redux';
+import { cityList } from '/src/utils/constants';
 import styles from './WeatherList.module.scss';
+import { fetchCityByName } from '/src/store/actions';
 
 export const WeatherList = () => {
+  const dispatch = useDispatch();
   const [dropdown, setDropdown] = useState(false);
+  const currentCity = useSelector((state) => state.city);
 
   const toggleDropdown = () => {
     setDropdown(!dropdown);
@@ -13,16 +17,24 @@ export const WeatherList = () => {
     ? `${styles['list']}`
     : `${styles['list']} ${styles['hidden']}`;
 
+  const handleOnClick = (city) => {
+    dispatch(fetchCityByName(city));
+  };
+
   return (
     <>
       <div className={styles['city']}>
         <div className={styles['city-selected']} onClick={toggleDropdown}>
-          Kyiv
+          {currentCity ? currentCity.name : cityList[0].name}
         </div>
         <ul className={listClass}>
           {cityList.map((city) => {
             return (
-              <li className={styles['item']} key={city}>
+              <li
+                className={styles['item']}
+                key={city}
+                onClick={() => handleOnClick(city)}
+              >
                 {city}
               </li>
             );
