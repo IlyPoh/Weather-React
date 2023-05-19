@@ -3,15 +3,15 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // components
-import { Button } from '/src/components/Button/Button';
-import { cityList } from '/src/utils/constants';
-import directionIcon from '/src/assets/images/icon-direction-pointer.svg';
-import { ErrorBlock } from '/src/components/ErrorBlock/ErrorBlock';
-import { getUserGeolocation } from '/src/helpers/helpers';
-import { Image } from '/src/components/Image/Image';
-import { Loading } from '/src/components/Loading/Loading';
-import pressureIcon from '/src/assets/images/icon-pressure.svg';
-import { WeatherList } from '/src/components/WeatherList/WeatherList';
+import { Button } from '../../components/Button/Button';
+import { cityList } from '../../utils/constants';
+import directionIcon from '../../assets/images/icon-direction-pointer.svg';
+import { ErrorBlock } from '../../components/ErrorBlock/ErrorBlock';
+import { getUserGeolocation } from '../../helpers/helpers';
+import { Image } from '../../components/Image/Image';
+import { Loading } from '../../components/Loading/Loading';
+import pressureIcon from '../../assets/images/icon-pressure.svg';
+import { WeatherList } from '../../components/WeatherList/WeatherList';
 
 // style
 import styles from './weather.module.scss';

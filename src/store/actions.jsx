@@ -5,8 +5,8 @@ import axios from 'axios';
 import {
   fetchWeatherByCityURL,
   fetchWeatherByGeolocationURL,
-} from '/src/utils/config';
-import { updateData } from '/src/helpers/helpers';
+} from '../utils/config';
+import { updateData } from '../helpers/helpers';
 
 export const UPDATE_CITY = 'UPDATE_CITY';
 export const UPDATE_ERRORS = 'UPDATE_ERRORS';

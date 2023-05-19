@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // components
-import { cityList } from '/src/utils/constants';
-import { fetchCityByName } from '/src/store/actions';
+import { cityList } from '../../utils/constants';
+import { fetchCityByName } from '../../store/actions';
 
 // style
 import styles from './WeatherList.module.scss';
