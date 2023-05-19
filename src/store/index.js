@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { UPDATE_CITY, UPDATE_ERRORS, UPDATE_LOADING } from './actions';
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
   fetchWeatherByCityURL,
   fetchWeatherByGeolocationURL,
-} from '/src/utils/config';
+} from '../utils/config';
 import { updateData } from '/src/helpers/helpers';
 
 export const UPDATE_CITY = 'UPDATE_CITY';
@@ -27,7 +27,6 @@ const updateLoading = (loading) => ({
 export const fetchCityByGeolocation = (lat, lon) => {
   return async (dispatch) => {
     try {
-      // Add animation here if needed
       dispatch(updateLoading(true));
 
       const response = await axios.get(fetchWeatherByGeolocationURL(lat, lon));
@@ -35,18 +34,14 @@ export const fetchCityByGeolocation = (lat, lon) => {
 
       updateData(data);
 
-      // Update city in the state
       dispatch(updateCity(data));
-      dispatch(updateErrors(null));
       localStorage.userCity = data.name;
 
-      // Remove animation here if needed
       dispatch(updateLoading(false));
     } catch (error) {
-      console.log('error', error);
+      console.log(error);
 
-      // Update errors in the state
-      dispatch(updateErrors(error));
+      dispatch(handleErrorMessage(error));
     }
   };
 };
@@ -62,15 +57,19 @@ export const fetchCityByName = (cityName) => {
       updateData(data);
 
       dispatch(updateCity(data));
-      dispatch(updateErrors(null));
       localStorage.userCity = data.name;
 
       dispatch(updateLoading(false));
     } catch (error) {
-      console.log('error', error);
+      console.log(error);
 
-      // Update errors in the state
-      dispatch(updateErrors(error));
+      dispatch(handleErrorMessage(error));
     }
+  };
+};
+
+export const handleErrorMessage = (error) => {
+  return (dispatch) => {
+    dispatch(updateErrors(error));
   };
 };

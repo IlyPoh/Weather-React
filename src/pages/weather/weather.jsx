@@ -20,7 +20,6 @@ export const Weather = () => {
 
   useEffect(() => {
     getUserGeolocation(dispatch, cityList);
-    console.log('city', city);
   }, [dispatch]);
 
   const handleOnClick = () => {
@@ -116,9 +115,9 @@ export const Weather = () => {
             </div>
           </div>
         </div>
+        {error && <ErrorBlock />}
+        {loading && <Loading />}
       </div>
-      {error && <ErrorBlock />}
-      {loading && <Loading />}
     </>
   );
 };

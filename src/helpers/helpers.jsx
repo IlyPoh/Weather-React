@@ -1,5 +1,6 @@
 import { months, directions } from '/src/utils/constants';
 import { fetchCityByGeolocation, fetchCityByName } from '/src/store/actions';
+import { handleErrorMessage } from '../store/actions';
 
 export const getUserGeolocation = (dispatch, cityList) => {
   navigator.geolocation.getCurrentPosition(
@@ -14,7 +15,7 @@ export const getUserGeolocation = (dispatch, cityList) => {
       }
     },
     (error) => {
-      console.log(error);
+      dispatch(handleErrorMessage(error));
 
       if (!localStorage.userCity) {
         dispatch(fetchCityByName(cityList[0]));
