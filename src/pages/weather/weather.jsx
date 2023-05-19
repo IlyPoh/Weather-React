@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // components
 import { Button } from '/src/components/Button/Button';
-import { WeatherList } from '/src/components/WeatherList/WeatherList';
-import { Image } from '/src/components/Image/Image';
 import { cityList } from '/src/utils/constants';
-import { getUserGeolocation } from '/src/helpers/helpers';
 import directionIcon from '/src/assets/images/icon-direction-pointer.svg';
-import pressureIcon from '/src/assets/images/icon-pressure.svg';
 import { ErrorBlock } from '/src/components/ErrorBlock/ErrorBlock';
+import { getUserGeolocation } from '/src/helpers/helpers';
+import { Image } from '/src/components/Image/Image';
 import { Loading } from '/src/components/Loading/Loading';
+import pressureIcon from '/src/assets/images/icon-pressure.svg';
+import { WeatherList } from '/src/components/WeatherList/WeatherList';
 
 // style
 import styles from './weather.module.scss';
