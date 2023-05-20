@@ -3,15 +3,15 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // components
-import { Button } from '../../components/Button/Button';
-import { cityList } from '../../utils/constants';
-import directionIcon from '../../assets/images/icon-direction-pointer.svg';
-import { ErrorBlock } from '../../components/ErrorBlock/ErrorBlock';
-import { getUserGeolocation } from '../../helpers/helpers';
 import { Image } from '../../components/Image/Image';
+import { Button } from '../../components/Button/Button';
 import { Loading } from '../../components/Loading/Loading';
-import pressureIcon from '../../assets/images/icon-pressure.svg';
+import { ErrorBlock } from '../../components/ErrorBlock/ErrorBlock';
 import { WeatherList } from '../../components/WeatherList/WeatherList';
+import { cityList } from '../../utils/constants';
+import { getUserGeolocation } from '../../helpers/helpers';
+import pressureIcon from '../../assets/images/icon-pressure.svg';
+import directionIcon from '../../assets/images/icon-direction-pointer.svg';
 
 // style
 import styles from './weather.module.scss';
@@ -19,9 +19,7 @@ import styles from './weather.module.scss';
 export const Weather = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-  const city = state?.city;
-  const error = state?.error;
-  const loading = state?.loading;
+  const { city, error, loading } = state;
 
   useEffect(() => {
     getUserGeolocation(dispatch, cityList);
@@ -35,6 +33,8 @@ export const Weather = () => {
   return (
     <>
       <div className={styles['content']}>
+        {error && <ErrorBlock />}
+        {loading && <Loading />}
         <div className={styles['section']}>
           <div className={styles['logo']}>
             <h1>Weather app</h1>
@@ -120,8 +120,6 @@ export const Weather = () => {
             </div>
           </div>
         </div>
-        {error && <ErrorBlock />}
-        {loading && <Loading />}
       </div>
     </>
   );
