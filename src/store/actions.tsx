@@ -63,7 +63,7 @@ export const fetchCityByGeolocation = (lat: boolean, lon: boolean) => {
 
       dispatch(updateLoading(false));
     } catch (error) {
-      dispatch(handleErrorMessage(error));
+      dispatch(updateErrors(error));
     }
   };
 };
@@ -83,7 +83,7 @@ export const fetchCityByName = (cityName: string) => {
 
       dispatch(updateLoading(false));
     } catch (error) {
-      dispatch(handleErrorMessage(error));
+      dispatch(updateErrors(error));
     }
   };
 };
@@ -91,5 +91,11 @@ export const fetchCityByName = (cityName: string) => {
 export const handleErrorMessage = (error: string) => {
   return (dispatch: Dispatch<WeatherActionTypes>) => {
     dispatch(updateErrors(error));
+  };
+};
+
+export const handleLoading = (loading: boolean) => {
+  return (dispatch: Dispatch<WeatherActionTypes>) => {
+    dispatch(updateLoading(loading));
   };
 };

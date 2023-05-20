@@ -13,7 +13,7 @@ import { getUserGeolocation } from '../../helpers/helpers';
 import pressureIcon from '../../assets/images/icon-pressure.svg';
 import directionIcon from '../../assets/images/icon-direction-pointer.svg';
 import { IAppState } from '../../store/index';
-import { WeatherActionTypes } from '../../store/actions';
+import { handleLoading } from '../../store/actions';
 
 // style
 import styles from './weather.module.scss';
@@ -25,6 +25,7 @@ export const Weather = () => {
 
   useEffect(() => {
     getUserGeolocation(dispatch, cityList);
+    dispatch(handleLoading(true));
   }, [dispatch]);
 
   const handleOnClick = () => {
