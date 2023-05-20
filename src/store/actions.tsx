@@ -48,7 +48,7 @@ const updateLoading = (loading: boolean): IUpdateLoadingAction => ({
   payload: loading,
 });
 
-export const fetchCityByGeolocation = (lat: boolean, lon: boolean) => {
+export const fetchCityByGeolocation = (lat: number, lon: number) => {
   return async (dispatch: Dispatch<WeatherActionTypes>) => {
     try {
       dispatch(updateLoading(true));
@@ -62,7 +62,7 @@ export const fetchCityByGeolocation = (lat: boolean, lon: boolean) => {
       localStorage.userCity = data.name;
 
       dispatch(updateLoading(false));
-    } catch (error) {
+    } catch (error: any) {
       dispatch(updateErrors(error));
     }
   };
@@ -82,7 +82,7 @@ export const fetchCityByName = (cityName: string) => {
       localStorage.userCity = data.name;
 
       dispatch(updateLoading(false));
-    } catch (error) {
+    } catch (error: any) {
       dispatch(updateErrors(error));
     }
   };
