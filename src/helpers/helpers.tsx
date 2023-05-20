@@ -1,14 +1,21 @@
+// libraries
+import { Dispatch } from 'react';
+
 // components
 import { months, directions } from '../utils/constants';
 import {
+  WeatherActionTypes,
   fetchCityByGeolocation,
   fetchCityByName,
   handleErrorMessage,
 } from '../store/actions';
 
-export const getUserGeolocation = (dispatch, cityList) => {
+export const getUserGeolocation = (
+  dispatch: Dispatch<WeatherActionTypes>,
+  cityList: string[]
+) => {
   navigator.geolocation.getCurrentPosition(
-    (data) => {
+    (data: GeolocationPosition) => {
       const lat = data.coords.latitude;
       const lon = data.coords.longitude;
 
@@ -18,7 +25,7 @@ export const getUserGeolocation = (dispatch, cityList) => {
         dispatch(fetchCityByName(localStorage.userCity));
       }
     },
-    (error) => {
+    (error: GeolocationPositionError) => {
       dispatch(handleErrorMessage(error));
 
       if (!localStorage.userCity) {
@@ -30,7 +37,7 @@ export const getUserGeolocation = (dispatch, cityList) => {
   );
 };
 
-function dewPointCelsius(temperature, humidity) {
+function dewPointCelsius(temperature: number, humidity: number): number {
   const vaporPressureConstant = 17.27;
   const saturationVaporPressureConstant = 237.7;
   const alpha =
@@ -44,7 +51,7 @@ function dewPointCelsius(temperature, humidity) {
   return dewPoint;
 }
 
-function findWindDirection(windDeg) {
+function findWindDirection(windDeg: number): string {
   const windDirectionDegrees = 45;
   const numberOfDirections = 8;
   const windDirectionIndex =
@@ -54,7 +61,7 @@ function findWindDirection(windDeg) {
   return windDirectionCardinal;
 }
 
-function getLocalTime(value) {
+function getLocalTime(value: number): string {
   const time = new Date();
   const currentUTCDate = new Date(
     time.getTime() + time.getTimezoneOffset() * 60 * 1000
@@ -73,11 +80,11 @@ function getLocalTime(value) {
   return `${hours}:${minutes} ${ampm} ${currentMonth} ${date}`;
 }
 
-function firstLetterToUpperCase(string) {
+function firstLetterToUpperCase(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export const updateData = (data) => {
+export const updateData = (data: any) => {
   const visibilityMetric = 1000;
 
   data.fullname = `${data.name}, ${data.sys.country}`;

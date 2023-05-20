@@ -1,7 +1,12 @@
-export const Image = ({ size, src }) => {
+interface ImageProps {
+  size: number[];
+  src: string;
+}
+
+export const Image: React.FC<ImageProps> = ({ size, src }) => {
   const [width, height] = size;
 
-  const divStyle = {
+  const divStyle: React.CSSProperties = {
     display: 'inline-block',
     width: '100%',
     maxWidth: width,

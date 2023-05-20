@@ -12,13 +12,15 @@ import { cityList } from '../../utils/constants';
 import { getUserGeolocation } from '../../helpers/helpers';
 import pressureIcon from '../../assets/images/icon-pressure.svg';
 import directionIcon from '../../assets/images/icon-direction-pointer.svg';
+import { IAppState } from '../../store/index';
+import { WeatherActionTypes } from '../../store/actions';
 
 // style
 import styles from './weather.module.scss';
 
 export const Weather = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  const state = useSelector((state: IAppState) => state);
   const { city, error, loading } = state;
 
   useEffect(() => {

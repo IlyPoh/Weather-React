@@ -12,7 +12,7 @@ import styles from './WeatherList.module.scss';
 export const WeatherList = () => {
   const dispatch = useDispatch();
   const [dropdown, setDropdown] = useState(false);
-  const currentCity = useSelector((state) => state.city);
+  const currentCity = useSelector((state: any) => state.city);
 
   const toggleDropdown = () => {
     setDropdown(!dropdown);
@@ -22,7 +22,7 @@ export const WeatherList = () => {
     ? `${styles['list']}`
     : `${styles['list']} ${styles['hidden']}`;
 
-  const handleOnClick = (city) => {
+  const handleOnClick = (city: string) => {
     dispatch(fetchCityByName(city));
   };
 
@@ -30,7 +30,7 @@ export const WeatherList = () => {
     <>
       <div className={styles['city']}>
         <div className={styles['city-selected']} onClick={toggleDropdown}>
-          {currentCity ? currentCity.name : cityList[0].name}
+          {currentCity?.name}
         </div>
         <ul className={listClass}>
           {cityList.map((city) => {

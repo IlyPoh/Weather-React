@@ -1,5 +1,6 @@
 // libraries
-import axios from 'axios';
+import { Dispatch } from 'react';
+import axios from '../../node_modules/axios/index';
 
 // components
 import {
@@ -12,23 +13,43 @@ export const UPDATE_CITY = 'UPDATE_CITY';
 export const UPDATE_ERRORS = 'UPDATE_ERRORS';
 export const UPDATE_LOADING = 'UPDATE_LOADING';
 
-const updateCity = (city) => ({
+interface IUpdateCityAction {
+  type: typeof UPDATE_CITY;
+  payload: string;
+}
+
+interface IUpdateErrorsAction {
+  type: typeof UPDATE_ERRORS;
+  payload: string;
+}
+
+interface IUpdateLoadingAction {
+  type: typeof UPDATE_LOADING;
+  payload: boolean;
+}
+
+export type WeatherActionTypes =
+  | IUpdateCityAction
+  | IUpdateErrorsAction
+  | IUpdateLoadingAction;
+
+const updateCity = (city: string): IUpdateCityAction => ({
   type: UPDATE_CITY,
   payload: city,
 });
 
-const updateErrors = (error) => ({
+const updateErrors = (error: string): IUpdateErrorsAction => ({
   type: UPDATE_ERRORS,
   payload: error,
 });
 
-const updateLoading = (loading) => ({
+const updateLoading = (loading: boolean): IUpdateLoadingAction => ({
   type: UPDATE_LOADING,
   payload: loading,
 });
 
-export const fetchCityByGeolocation = (lat, lon) => {
-  return async (dispatch) => {
+export const fetchCityByGeolocation = (lat: boolean, lon: boolean) => {
+  return async (dispatch: Dispatch<WeatherActionTypes>) => {
     try {
       dispatch(updateLoading(true));
 
@@ -42,15 +63,13 @@ export const fetchCityByGeolocation = (lat, lon) => {
 
       dispatch(updateLoading(false));
     } catch (error) {
-      console.log(error);
-
       dispatch(handleErrorMessage(error));
     }
   };
 };
 
-export const fetchCityByName = (cityName) => {
-  return async (dispatch) => {
+export const fetchCityByName = (cityName: string) => {
+  return async (dispatch: Dispatch<WeatherActionTypes>) => {
     try {
       dispatch(updateLoading(true));
 
@@ -64,15 +83,13 @@ export const fetchCityByName = (cityName) => {
 
       dispatch(updateLoading(false));
     } catch (error) {
-      console.log(error);
-
       dispatch(handleErrorMessage(error));
     }
   };
 };
 
-export const handleErrorMessage = (error) => {
-  return (dispatch) => {
+export const handleErrorMessage = (error: string) => {
+  return (dispatch: Dispatch<WeatherActionTypes>) => {
     dispatch(updateErrors(error));
   };
 };

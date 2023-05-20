@@ -1,17 +1,23 @@
 // libraries
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import thunk from '../../node_modules/redux-thunk/es/index';
+import { createStore, applyMiddleware, AnyAction } from 'redux';
 
 // components
 import { UPDATE_CITY, UPDATE_ERRORS, UPDATE_LOADING } from './actions';
 
-const initialState = {
+export interface IAppState {
+  city: string | null;
+  error: string | null;
+  loading: boolean;
+}
+
+const initialState: IAppState = {
   city: null,
   error: null,
   loading: false,
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
     case UPDATE_CITY:
       return {
