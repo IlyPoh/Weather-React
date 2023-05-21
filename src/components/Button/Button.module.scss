@@ -1,0 +1,24 @@
+@import '/src/styles/base/config';
+
+.btn {
+  padding: 10px 30px;
+  border: none;
+  transition: color $defaultTransition, background $defaultTransition,
+    border $defaultTransition;
+
+  &-tranparent {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: transparent;
+    background-image: $gradient;
+    background-clip: text;
+    -webkit-background-clip: text;
+    cursor: pointer;
+
+    &[disabled] {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+}
