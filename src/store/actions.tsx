@@ -9,47 +9,35 @@ import {
 } from '../utils/config';
 import { updateData } from '../helpers/helpers';
 
+// types
+import {
+  UpdateCityAction,
+  UpdateErrorsAction,
+  UpdateLoadingAction,
+  WeatherActionTypes,
+} from '../types/store';
+
 export const UPDATE_CITY = 'UPDATE_CITY';
 export const UPDATE_ERRORS = 'UPDATE_ERRORS';
 export const UPDATE_LOADING = 'UPDATE_LOADING';
 
-interface IUpdateCityAction {
-  type: typeof UPDATE_CITY;
-  payload: string;
-}
-
-interface IUpdateErrorsAction {
-  type: typeof UPDATE_ERRORS;
-  payload: string;
-}
-
-interface IUpdateLoadingAction {
-  type: typeof UPDATE_LOADING;
-  payload: boolean;
-}
-
-export type WeatherActionTypes =
-  | IUpdateCityAction
-  | IUpdateErrorsAction
-  | IUpdateLoadingAction;
-
-const updateCity = (city: string): IUpdateCityAction => ({
+const updateCity = (city: string): UpdateCityAction => ({
   type: UPDATE_CITY,
   payload: city,
 });
 
-const updateErrors = (error: string): IUpdateErrorsAction => ({
+const updateErrors = (error: string): UpdateErrorsAction => ({
   type: UPDATE_ERRORS,
   payload: error,
 });
 
-const updateLoading = (loading: boolean): IUpdateLoadingAction => ({
+const updateLoading = (loading: boolean): UpdateLoadingAction => ({
   type: UPDATE_LOADING,
   payload: loading,
 });
 
 export const fetchCityByGeolocation = (lat: number, lon: number) => {
-  return async (dispatch: Dispatch<WeatherActionTypes>) => {
+  return async (dispatch: Dispatch<WeatherActionTypes>): Promise<void> => {
     try {
       dispatch(updateLoading(true));
 
@@ -59,6 +47,7 @@ export const fetchCityByGeolocation = (lat: number, lon: number) => {
       updateData(data);
 
       dispatch(updateCity(data));
+
       localStorage.userCity = data.name;
 
       dispatch(updateLoading(false));
@@ -69,7 +58,7 @@ export const fetchCityByGeolocation = (lat: number, lon: number) => {
 };
 
 export const fetchCityByName = (cityName: string) => {
-  return async (dispatch: Dispatch<WeatherActionTypes>) => {
+  return async (dispatch: Dispatch<WeatherActionTypes>): Promise<void> => {
     try {
       dispatch(updateLoading(true));
 

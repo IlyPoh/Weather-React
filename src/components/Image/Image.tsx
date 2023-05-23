@@ -1,7 +1,4 @@
-interface ImageProps {
-  size: number[];
-  src: string;
-}
+import { ImageProps } from '../../types';
 
 export const Image: React.FC<ImageProps> = ({ size, src }) => {
   const [width, height] = size;

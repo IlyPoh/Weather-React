@@ -4,29 +4,31 @@ import { Dispatch } from 'react';
 // components
 import { months, directions } from '../utils/constants';
 import {
-  WeatherActionTypes,
   fetchCityByGeolocation,
   fetchCityByName,
   handleErrorMessage,
 } from '../store/actions';
+
+// types
+import { WeatherActionTypes } from '../types/store';
+import { City } from '../types/city';
 
 export const getUserGeolocation = (
   dispatch: Dispatch<WeatherActionTypes>,
   cityList: string[]
 ) => {
   navigator.geolocation.getCurrentPosition(
-    (data: GeolocationPosition) => {
-      const lat = data.coords.latitude;
-      const lon = data.coords.longitude;
+    (data: GeolocationPosition): void => {
+      const { latitude, longitude } = data.coords;
 
       if (!localStorage.userCity) {
-        dispatch(fetchCityByGeolocation(lat, lon));
+        dispatch(fetchCityByGeolocation(latitude, longitude));
       } else {
         dispatch(fetchCityByName(localStorage.userCity));
       }
     },
     (error: GeolocationPositionError) => {
-      dispatch(handleErrorMessage(error));
+      dispatch(handleErrorMessage(error.message));
 
       if (!localStorage.userCity) {
         dispatch(fetchCityByName(cityList[0]));
@@ -84,21 +86,23 @@ function firstLetterToUpperCase(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export const updateData = (data: any) => {
+export const updateData = (data: Partial<City>): Partial<City> => {
   const visibilityMetric = 1000;
 
-  data.fullname = `${data.name}, ${data.sys.country}`;
-  data.temp = Math.round(data.main.temp);
-  data.state = data.weather[0].main;
-  data.secondState = firstLetterToUpperCase(data.weather[0].description);
-  data.icon = data.weather[0].icon;
-  data.time = getLocalTime(data.timezone);
-  data.feelsLike = Math.round(data.main.feels_like);
-  data.windDeg = data.wind.deg;
-  data.windDirection = findWindDirection(data.wind.deg);
-  data.windSpeed = data.wind.speed;
-  data.pressure = data.main.pressure;
-  data.humidity = data.main.humidity;
-  data.dew = dewPointCelsius(data.main.temp, data.main.humidity);
-  data.visibility = (data.visibility / visibilityMetric).toFixed(1);
+  data.fullname = `${data.name}, ${data.sys?.country}`;
+  data.temp = Math.round(data.main?.temp || 0);
+  data.state = data.weather?.[0]?.main || '';
+  data.secondState = firstLetterToUpperCase(
+    data.weather?.[0]?.description || ''
+  );
+  data.icon = data.weather?.[0]?.icon || '';
+  data.time = getLocalTime(data.timezone || 0);
+  data.feelsLike = Math.round(data.main?.feels_like || 0);
+  data.windDirection = findWindDirection(data.wind?.deg || 0);
+  data.dew = dewPointCelsius(data.main?.temp || 0, data.main?.humidity || 0);
+  data.visibility = (
+    data.visibility ? parseFloat(data.visibility) / visibilityMetric : 0
+  ).toFixed(1);
+
+  return data;
 };

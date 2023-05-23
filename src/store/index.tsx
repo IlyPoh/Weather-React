@@ -5,13 +5,10 @@ import { createStore, applyMiddleware, AnyAction } from 'redux';
 // components
 import { UPDATE_CITY, UPDATE_ERRORS, UPDATE_LOADING } from './actions';
 
-export interface IAppState {
-  city: string | null;
-  error: string | null;
-  loading: boolean;
-}
+// types
+import { AppState } from '../types/store';
 
-const initialState: IAppState = {
+const initialState: AppState = {
   city: null,
   error: null,
   loading: false,

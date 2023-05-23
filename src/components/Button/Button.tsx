@@ -1,13 +1,11 @@
 // libraries
 import classNames from 'classnames';
 
+// types
+import { ButtonProps } from '../../types';
+
 // style
 import styles from './Button.module.scss';
-
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  text?: string;
-  classes?: string;
-}
 
 export const Button: React.FC<ButtonProps> = ({
   text = 'Button',
