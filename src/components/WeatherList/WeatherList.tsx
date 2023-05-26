@@ -9,7 +9,7 @@ import { fetchCityByName } from '../../store/actions';
 // style
 import styles from './WeatherList.module.scss';
 
-export const WeatherList = () => {
+export const WeatherList: React.FC = () => {
   const dispatch = useDispatch();
   const [dropdown, setDropdown] = useState(false);
   const currentCity = useSelector((state: any) => state.city);

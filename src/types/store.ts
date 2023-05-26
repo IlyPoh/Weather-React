@@ -1,4 +1,3 @@
-import { UPDATE_CITY, UPDATE_ERRORS, UPDATE_LOADING } from '../store/actions';
 import { City } from './city';
 
 export interface AppState {
@@ -7,18 +6,24 @@ export interface AppState {
   loading: boolean;
 }
 
+export enum ActionTypes {
+  UPDATE_CITY = 'UPDATE_CITY',
+  UPDATE_ERRORS = 'UPDATE_ERRORS',
+  UPDATE_LOADING = 'UPDATE_LOADING',
+}
+
 export interface UpdateCityAction {
-  type: typeof UPDATE_CITY;
+  type: ActionTypes.UPDATE_CITY;
   payload: string;
 }
 
 export interface UpdateErrorsAction {
-  type: typeof UPDATE_ERRORS;
+  type: ActionTypes.UPDATE_ERRORS;
   payload: string;
 }
 
 export interface UpdateLoadingAction {
-  type: typeof UPDATE_LOADING;
+  type: ActionTypes.UPDATE_LOADING;
   payload: boolean;
 }
 

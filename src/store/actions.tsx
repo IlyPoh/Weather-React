@@ -11,28 +11,25 @@ import { updateData } from '../helpers/helpers';
 
 // types
 import {
+  ActionTypes,
   UpdateCityAction,
   UpdateErrorsAction,
   UpdateLoadingAction,
   WeatherActionTypes,
 } from '../types/store';
 
-export const UPDATE_CITY = 'UPDATE_CITY';
-export const UPDATE_ERRORS = 'UPDATE_ERRORS';
-export const UPDATE_LOADING = 'UPDATE_LOADING';
-
 const updateCity = (city: string): UpdateCityAction => ({
-  type: UPDATE_CITY,
+  type: ActionTypes.UPDATE_CITY,
   payload: city,
 });
 
 const updateErrors = (error: string): UpdateErrorsAction => ({
-  type: UPDATE_ERRORS,
+  type: ActionTypes.UPDATE_ERRORS,
   payload: error,
 });
 
 const updateLoading = (loading: boolean): UpdateLoadingAction => ({
-  type: UPDATE_LOADING,
+  type: ActionTypes.UPDATE_LOADING,
   payload: loading,
 });
 

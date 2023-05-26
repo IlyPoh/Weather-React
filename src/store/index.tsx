@@ -2,11 +2,8 @@
 import thunk from '../../node_modules/redux-thunk/es/index';
 import { createStore, applyMiddleware, AnyAction } from 'redux';
 
-// components
-import { UPDATE_CITY, UPDATE_ERRORS, UPDATE_LOADING } from './actions';
-
 // types
-import { AppState } from '../types/store';
+import { ActionTypes, AppState } from '../types/store';
 
 const initialState: AppState = {
   city: null,
@@ -16,17 +13,17 @@ const initialState: AppState = {
 
 const reducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
-    case UPDATE_CITY:
+    case ActionTypes.UPDATE_CITY:
       return {
         ...state,
         city: action.payload,
       };
-    case UPDATE_ERRORS:
+    case ActionTypes.UPDATE_ERRORS:
       return {
         ...state,
         error: action.payload,
       };
-    case UPDATE_LOADING:
+    case ActionTypes.UPDATE_LOADING:
       return {
         ...state,
         loading: action.payload,

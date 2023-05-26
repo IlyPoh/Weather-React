@@ -1,5 +1,5 @@
 // libraries
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // components
@@ -20,7 +20,7 @@ import { AppState } from '../../types/store';
 // style
 import styles from './weather.module.scss';
 
-export const Weather = () => {
+export const Weather: React.FC = () => {
   const dispatch = useDispatch();
   const state = useSelector((state: AppState) => state);
   const { city, error, loading }: AppState = state;
@@ -99,7 +99,7 @@ export const Weather = () => {
                   className={`${styles['icon-direction']} ${styles['icon']}`}
                 >
                   <img
-                    src={directionIcon}
+                    src={`${directionIcon}`}
                     alt="Direction Icon"
                     style={{ transform: `rotate(${city?.wind.deg}deg)` }}
                   />
@@ -110,7 +110,7 @@ export const Weather = () => {
                 <span
                   className={`${styles['icon-pressure']} ${styles['icon']}`}
                 >
-                  <img src={pressureIcon} alt="Pressure Icon" />
+                  <img src={`${pressureIcon}`} alt="Pressure Icon" />
                 </span>
                 {`${city?.main.pressure} hPa`}
               </div>
