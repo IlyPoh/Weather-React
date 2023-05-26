@@ -1,37 +1,9 @@
 // libraries
 import thunk from 'redux-thunk';
-import { createStore, applyMiddleware, AnyAction } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 
-// types
-import { ActionTypes, AppState } from '../types/store';
-
-const initialState: AppState = {
-  city: null,
-  error: null,
-  loading: false,
-};
-
-const reducer = (state = initialState, action: AnyAction): AppState => {
-  switch (action.type) {
-    case ActionTypes.UPDATE_CITY:
-      return {
-        ...state,
-        city: action.payload,
-      };
-    case ActionTypes.UPDATE_ERRORS:
-      return {
-        ...state,
-        error: action.payload,
-      };
-    case ActionTypes.UPDATE_LOADING:
-      return {
-        ...state,
-        loading: action.payload,
-      };
-    default:
-      return state;
-  }
-};
+// reducers
+import { reducer } from './reducer';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
