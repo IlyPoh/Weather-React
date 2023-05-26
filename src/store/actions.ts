@@ -1,6 +1,6 @@
 // libraries
 import { Dispatch } from 'react';
-import axios from '../../node_modules/axios/index';
+import axios from 'axios';
 
 // components
 import {

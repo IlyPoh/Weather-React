@@ -1,5 +1,5 @@
 // libraries
-import thunk from '../../node_modules/redux-thunk/es/index';
+import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, AnyAction } from 'redux';
 
 // types
@@ -11,7 +11,7 @@ const initialState: AppState = {
   loading: false,
 };
 
-const reducer = (state = initialState, action: AnyAction) => {
+const reducer = (state = initialState, action: AnyAction): AppState => {
   switch (action.type) {
     case ActionTypes.UPDATE_CITY:
       return {
