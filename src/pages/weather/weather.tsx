@@ -1,5 +1,6 @@
 // libraries
-import { FC, useEffect } from 'react';
+import { useEffect } from 'react';
+import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
 
 // components
@@ -15,13 +16,14 @@ import directionIcon from '../../assets/images/icon-direction-pointer.svg';
 import { handleLoading } from '../../store/actions';
 
 // types
-import { AppState } from '../../types/store';
+import { AppState, WeatherActionTypes } from '../../types/store';
 
 // style
 import styles from './weather.module.scss';
 
 export const Weather: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch: ThunkDispatch<null, AppState, WeatherActionTypes> =
+    useDispatch();
   const state = useSelector((state: AppState) => state);
   const { city, error, loading }: AppState = state;
 

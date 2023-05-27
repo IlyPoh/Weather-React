@@ -1,6 +1,3 @@
-// libraries
-import { Dispatch } from 'react';
-
 // components
 import { months, directions } from '../utils/constants';
 import {
@@ -10,13 +7,14 @@ import {
 } from '../store/actions';
 
 // types
-import { WeatherActionTypes } from '../types/store';
+import { AppState, WeatherActionTypes } from '../types/store';
 import { City } from '../types/city';
+import { ThunkDispatch } from 'redux-thunk';
 
 export const getUserGeolocation = (
-  dispatch: Dispatch<WeatherActionTypes>,
+  dispatch: ThunkDispatch<null, AppState, WeatherActionTypes>,
   cityList: string[]
-) => {
+): void => {
   navigator.geolocation.getCurrentPosition(
     (data: GeolocationPosition): void => {
       const { latitude, longitude } = data.coords;
@@ -27,7 +25,7 @@ export const getUserGeolocation = (
         dispatch(fetchCityByName(localStorage.userCity));
       }
     },
-    (error: GeolocationPositionError) => {
+    (error: GeolocationPositionError): void => {
       dispatch(handleErrorMessage(error.message));
 
       if (!localStorage.userCity) {
