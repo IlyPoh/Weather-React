@@ -1,7 +1,9 @@
-export const Image = ({ size, src }) => {
+import { ImageProps } from '../../types';
+
+export const Image: React.FC<ImageProps> = ({ size, src }) => {
   const [width, height] = size;
 
-  const divStyle = {
+  const divStyle: React.CSSProperties = {
     display: 'inline-block',
     width: '100%',
     maxWidth: width,

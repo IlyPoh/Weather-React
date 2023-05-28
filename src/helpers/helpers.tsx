@@ -6,20 +6,27 @@ import {
   handleErrorMessage,
 } from '../store/actions';
 
-export const getUserGeolocation = (dispatch, cityList) => {
+// types
+import { AppState, WeatherActionTypes } from '../types/store';
+import { City } from '../types/city';
+import { ThunkDispatch } from 'redux-thunk';
+
+export const getUserGeolocation = (
+  dispatch: ThunkDispatch<null, AppState, WeatherActionTypes>,
+  cityList: string[]
+): void => {
   navigator.geolocation.getCurrentPosition(
-    (data) => {
-      const lat = data.coords.latitude;
-      const lon = data.coords.longitude;
+    (data: GeolocationPosition): void => {
+      const { latitude, longitude } = data.coords;
 
       if (!localStorage.userCity) {
-        dispatch(fetchCityByGeolocation(lat, lon));
+        dispatch(fetchCityByGeolocation(latitude, longitude));
       } else {
         dispatch(fetchCityByName(localStorage.userCity));
       }
     },
-    (error) => {
-      dispatch(handleErrorMessage(error));
+    (error: GeolocationPositionError): void => {
+      dispatch(handleErrorMessage(error.message));
 
       if (!localStorage.userCity) {
         dispatch(fetchCityByName(cityList[0]));
@@ -30,7 +37,7 @@ export const getUserGeolocation = (dispatch, cityList) => {
   );
 };
 
-function dewPointCelsius(temperature, humidity) {
+function dewPointCelsius(temperature: number, humidity: number): number {
   const vaporPressureConstant = 17.27;
   const saturationVaporPressureConstant = 237.7;
   const alpha =
@@ -44,7 +51,7 @@ function dewPointCelsius(temperature, humidity) {
   return dewPoint;
 }
 
-function findWindDirection(windDeg) {
+function findWindDirection(windDeg: number): string {
   const windDirectionDegrees = 45;
   const numberOfDirections = 8;
   const windDirectionIndex =
@@ -54,7 +61,7 @@ function findWindDirection(windDeg) {
   return windDirectionCardinal;
 }
 
-function getLocalTime(value) {
+function getLocalTime(value: number): string {
   const time = new Date();
   const currentUTCDate = new Date(
     time.getTime() + time.getTimezoneOffset() * 60 * 1000
@@ -73,25 +80,27 @@ function getLocalTime(value) {
   return `${hours}:${minutes} ${ampm} ${currentMonth} ${date}`;
 }
 
-function firstLetterToUpperCase(string) {
+function firstLetterToUpperCase(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export const updateData = (data) => {
+export const updateData = (data: Partial<City>): Partial<City> => {
   const visibilityMetric = 1000;
 
-  data.fullname = `${data.name}, ${data.sys.country}`;
-  data.temp = Math.round(data.main.temp);
-  data.state = data.weather[0].main;
-  data.secondState = firstLetterToUpperCase(data.weather[0].description);
-  data.icon = data.weather[0].icon;
-  data.time = getLocalTime(data.timezone);
-  data.feelsLike = Math.round(data.main.feels_like);
-  data.windDeg = data.wind.deg;
-  data.windDirection = findWindDirection(data.wind.deg);
-  data.windSpeed = data.wind.speed;
-  data.pressure = data.main.pressure;
-  data.humidity = data.main.humidity;
-  data.dew = dewPointCelsius(data.main.temp, data.main.humidity);
-  data.visibility = (data.visibility / visibilityMetric).toFixed(1);
+  data.fullname = `${data.name}, ${data.sys?.country}`;
+  data.temp = Math.round(data.main?.temp || 0);
+  data.state = data.weather?.[0]?.main || '';
+  data.secondState = firstLetterToUpperCase(
+    data.weather?.[0]?.description || ''
+  );
+  data.icon = data.weather?.[0]?.icon || '';
+  data.time = getLocalTime(data.timezone || 0);
+  data.feelsLike = Math.round(data.main?.feels_like || 0);
+  data.windDirection = findWindDirection(data.wind?.deg || 0);
+  data.dew = dewPointCelsius(data.main?.temp || 0, data.main?.humidity || 0);
+  data.visibility = (
+    data.visibility ? parseFloat(data.visibility) / visibilityMetric : 0
+  ).toFixed(1);
+
+  return data;
 };

@@ -1,7 +1,7 @@
 // style
 import styles from './Loading.module.scss';
 
-export const Loading = () => {
+export const Loading: React.FC = () => {
   return (
     <div className={styles['loading']}>
       <div className={styles['lds-roller']}>

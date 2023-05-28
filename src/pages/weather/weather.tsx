@@ -1,5 +1,6 @@
 // libraries
 import { useEffect } from 'react';
+import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
 
 // components
@@ -12,20 +13,26 @@ import { cityList } from '../../utils/constants';
 import { getUserGeolocation } from '../../helpers/helpers';
 import pressureIcon from '../../assets/images/icon-pressure.svg';
 import directionIcon from '../../assets/images/icon-direction-pointer.svg';
+import { handleLoading } from '../../store/actions';
+
+// types
+import { AppState, WeatherActionTypes } from '../../types/store';
 
 // style
 import styles from './weather.module.scss';
 
-export const Weather = () => {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  const { city, error, loading } = state;
+export const Weather: React.FC = () => {
+  const dispatch: ThunkDispatch<null, AppState, WeatherActionTypes> =
+    useDispatch();
+  const state = useSelector((state: AppState) => state);
+  const { city, error, loading }: AppState = state;
 
   useEffect(() => {
     getUserGeolocation(dispatch, cityList);
+    dispatch(handleLoading(true));
   }, [dispatch]);
 
-  const handleOnClick = () => {
+  const handleOnClick = (): void => {
     localStorage.removeItem('userCity');
     getUserGeolocation(dispatch, cityList);
   };
@@ -94,23 +101,24 @@ export const Weather = () => {
                   className={`${styles['icon-direction']} ${styles['icon']}`}
                 >
                   <img
-                    src={directionIcon}
-                    style={{ transform: `rotate(${city?.windDeg}deg)` }}
+                    src={`${directionIcon}`}
+                    alt="Direction Icon"
+                    style={{ transform: `rotate(${city?.wind.deg}deg)` }}
                   />
-                  {`${city?.windSpeed} m/s ${city?.windDirection}`}
+                  {`${city?.wind.speed} m/s ${city?.windDirection}`}
                 </span>
               </div>
               <div className={styles['additional-info-section']}>
                 <span
                   className={`${styles['icon-pressure']} ${styles['icon']}`}
                 >
-                  <img src={pressureIcon} alt="" />
+                  <img src={`${pressureIcon}`} alt="Pressure Icon" />
                 </span>
-                {`${city?.pressure} hPa`}
+                {`${city?.main.pressure} hPa`}
               </div>
               <div
                 className={styles['additional-info-section']}
-              >{`Humidity: ${city?.humidity}%`}</div>
+              >{`Humidity: ${city?.main.humidity}%`}</div>
               <div
                 className={styles['additional-info-section']}
               >{`Dew point: ${city?.dew}° C`}</div>
