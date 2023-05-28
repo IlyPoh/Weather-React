@@ -27,7 +27,7 @@ export const Weather: React.FC = () => {
   const state = useSelector((state: AppState) => state);
   const { city, error, loading }: AppState = state;
 
-  useEffect(() => {
+  useEffect((): void => {
     getUserGeolocation(dispatch, cityList);
     dispatch(handleLoading(true));
   }, [dispatch]);

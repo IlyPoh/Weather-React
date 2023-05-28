@@ -34,7 +34,7 @@ const updateLoading = (loading: boolean): UpdateLoadingAction => ({
 });
 
 export const fetchCityByGeolocation = (lat: number, lon: number) => {
-  return async (dispatch: Dispatch<WeatherActionTypes>) => {
+  return async (dispatch: Dispatch<WeatherActionTypes>): Promise<void> => {
     try {
       dispatch(updateLoading(true));
 
@@ -57,7 +57,7 @@ export const fetchCityByGeolocation = (lat: number, lon: number) => {
 };
 
 export const fetchCityByName = (cityName: string) => {
-  return async (dispatch: Dispatch<WeatherActionTypes>) => {
+  return async (dispatch: Dispatch<WeatherActionTypes>): Promise<void> => {
     try {
       dispatch(updateLoading(true));
 
