@@ -3,17 +3,22 @@
 .city {
   display: inline-block;
   position: relative;
+
   cursor: pointer;
+
   min-width: 200px;
 
   &-selected {
     padding: 10px 30px;
+
+    text-align: center;
+
     border: 2px solid $color-white;
     border-bottom: none;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+
     transition: background $defaultTransition;
-    text-align: center;
 
     &:hover {
       background: $color-shadow-black;
@@ -22,15 +27,17 @@
 }
 
 .list {
+  position: absolute;
+
   min-width: 100%;
+
   opacity: 1;
   visibility: visible;
   transition: opacity $defaultTransition, visibility $defaultTransition;
+
   background: $gradient;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-
-  position: absolute;
 
   &.hidden {
     opacity: 0;
@@ -40,8 +47,11 @@
 
 .item {
   padding: 5px 10px;
+
   text-align: center;
+
   border: 2px solid $color-white;
+
   transition: background $defaultTransition;
 
   &:hover {

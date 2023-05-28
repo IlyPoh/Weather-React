@@ -2,7 +2,9 @@
 
 .btn {
   padding: 10px 30px;
+
   border: none;
+
   transition: color $defaultTransition, background $defaultTransition,
     border $defaultTransition;
 
@@ -11,9 +13,11 @@
     text-transform: uppercase;
     font-weight: 700;
     color: transparent;
+
     background-image: $gradient;
     background-clip: text;
     -webkit-background-clip: text;
+
     cursor: pointer;
 
     &[disabled] {

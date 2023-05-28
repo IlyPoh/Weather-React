@@ -19,15 +19,15 @@ export const WeatherList: React.FC = () => {
   const [dropdown, setDropdown] = useState(false);
   const currentCity = useSelector((state: AppState) => state.city);
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (): void => {
     setDropdown(!dropdown);
   };
 
-  const listClass = dropdown
+  const listClass: string = dropdown
     ? `${styles['list']}`
     : `${styles['list']} ${styles['hidden']}`;
 
-  const handleOnClick = (city: string) => {
+  const handleOnClick = (city: string): void => {
     dispatch(fetchCityByName(city));
   };
 

@@ -1,33 +1,38 @@
 @import '/src/styles/base/config';
 
 .content {
-  min-height: 100vh;
-  background-image: $gradient;
-  color: $color-white;
-  overflow: hidden;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
+
+  min-height: 100vh;
+
+  color: $color-white;
+  background-image: $gradient;
+
+  overflow: hidden;
 
   .section {
     display: flex;
     justify-content: center;
 
     .logo {
-      padding: 20px 50px;
-      background: $color-shadow-white;
-      box-shadow: 0px 0px 3px 2px $color-shadow-white;
       margin: 20px;
+      padding: 20px 50px;
+
       text-align: center;
 
+      background: $color-shadow-white;
+      box-shadow: 0px 0px 3px 2px $color-shadow-white;
+
       h1 {
+        color: transparent;
+        font-size: 2.5rem;
+
         background-image: $gradient;
         background-clip: text;
         -webkit-background-clip: text;
-        color: transparent;
-        font-size: 2.5rem;
       }
 
       @media (min-width: 768px) {
@@ -42,11 +47,12 @@
 }
 
 .header {
-  justify-content: space-around;
   align-items: center;
-  font-size: 1.75rem;
+  justify-content: space-around;
   flex-direction: column-reverse;
   gap: 20px;
+
+  font-size: 1.75rem;
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -62,6 +68,7 @@
   }
   .local-city {
     display: inline-block;
+
     background: $color-shadow-white;
     box-shadow: 0px 0px 3px 2px $color-shadow-white;
 
@@ -86,6 +93,7 @@
 
   .temperature {
     margin-bottom: 20px;
+
     font-size: 20px;
     font-weight: 500;
   }
@@ -95,12 +103,14 @@
   justify-content: flex-end;
 
   .information {
-    background-color: $color-shadow-black;
-    box-shadow: 0px 0px 3px 2px $color-shadow-black;
+    width: 100%;
+
     padding: 20px;
     margin: 15px;
+
     border-radius: 20px;
-    width: 100%;
+    background-color: $color-shadow-black;
+    box-shadow: 0px 0px 3px 2px $color-shadow-black;
 
     @media (min-width: 480px) {
       width: unset;
@@ -108,20 +118,24 @@
 
     .time {
       margin-bottom: 10px;
+
       font-size: 13px;
       color: $color-orange;
     }
 
     .city {
       margin-bottom: 15px;
+
       font-weight: 700;
       font-size: 30px;
     }
 
     .temperature {
-      margin-bottom: 15px;
       display: flex;
       align-items: center;
+
+      margin-bottom: 15px;
+
       font-size: 30px;
       font-weight: 500;
     }
@@ -134,19 +148,24 @@
       display: grid;
       grid-template-columns: repeat(1, 1fr);
       grid-gap: 10px;
-      border-left: 2px solid $color-orange;
-      padding-left: 10px;
+
       white-space: nowrap;
+
+      padding-left: 10px;
+
+      border-left: 2px solid $color-orange;
 
       &-section {
         display: flex;
         align-items: center;
+
         line-height: 14px;
 
         .icon {
           img {
             width: 14px;
             height: 14px;
+
             margin-right: 5px;
 
             fill: $color-white;
