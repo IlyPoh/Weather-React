@@ -104,3 +104,7 @@ export const updateData = (data: Partial<City>): Partial<City> => {
 
   return data;
 };
+
+export const imageSrc = (imageURL: string): string => {
+  return `https://openweathermap.org/img/wn/${imageURL}@2x.png`;
+};
