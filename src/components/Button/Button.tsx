@@ -8,7 +8,7 @@ import { ButtonProps } from '../../types';
 import styles from './Button.module.scss';
 
 export const Button: React.FC<ButtonProps> = ({
-  text = 'Button',
+  text = '',
   classes = '',
   ...props
 }) => {

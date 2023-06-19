@@ -1,6 +1,6 @@
 import { ImageProps } from '../../types';
 
-export const Image: React.FC<ImageProps> = ({ size, src }) => {
+export const Image: React.FC<ImageProps> = ({ size, src, ...props }) => {
   const [width, height] = size;
 
   const divStyle: React.CSSProperties = {
@@ -12,7 +12,7 @@ export const Image: React.FC<ImageProps> = ({ size, src }) => {
 
   return (
     <div style={divStyle}>
-      {src && <img src={src} width={width} height={height} />}
+      {src && <img src={src} width={width} height={height} {...props} />}
     </div>
   );
 };

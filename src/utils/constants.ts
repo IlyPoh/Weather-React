@@ -1,4 +1,4 @@
-export const apiKey: string = '0c796f0b8200e08a4b2b28a170bb0484';
+export const apiKey: string = import.meta.env.VITE_API_KEY;
 export const URL: string = 'https://api.openweathermap.org/';
 
 export const cityList: string[] = [

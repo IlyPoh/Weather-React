@@ -7,7 +7,7 @@ import { ActionTypes, AppState } from '../types/store';
 const initialState: AppState = {
   city: null,
   error: null,
-  loading: false,
+  loading: true,
 };
 
 export const reducer = (state = initialState, action: AnyAction): AppState => {

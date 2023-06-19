@@ -10,10 +10,9 @@ import { Loading } from '../../components/Loading/Loading';
 import { ErrorBlock } from '../../components/ErrorBlock/ErrorBlock';
 import { WeatherList } from '../../components/WeatherList/WeatherList';
 import { cityList } from '../../utils/constants';
-import { getUserGeolocation } from '../../helpers/helpers';
+import { getUserGeolocation, imageSrc } from '../../helpers/helpers';
 import pressureIcon from '../../assets/images/icon-pressure.svg';
 import directionIcon from '../../assets/images/icon-direction-pointer.svg';
-import { handleLoading } from '../../store/actions';
 
 // types
 import { AppState, WeatherActionTypes } from '../../types/store';
@@ -29,7 +28,6 @@ export const Weather: React.FC = () => {
 
   useEffect((): void => {
     getUserGeolocation(dispatch, cityList);
-    dispatch(handleLoading(true));
   }, [dispatch]);
 
   const handleOnClick = (): void => {
@@ -63,11 +61,7 @@ export const Weather: React.FC = () => {
           <div className={styles['block']}>
             <Image
               size={[100, 100]}
-              src={
-                city?.icon
-                  ? `https://openweathermap.org/img/wn/${city?.icon}@2x.png`
-                  : ''
-              }
+              src={city?.icon ? imageSrc(city?.icon) : ''}
             />
           </div>
         </div>
@@ -84,11 +78,7 @@ export const Weather: React.FC = () => {
             <div className={styles['temperature']}>
               <Image
                 size={[60, 60]}
-                src={
-                  city?.icon
-                    ? `https://openweathermap.org/img/wn/${city?.icon}@2x.png`
-                    : ''
-                }
+                src={city?.icon ? imageSrc(city?.icon) : ''}
               />
               {`${city?.temp}° C`}
             </div>

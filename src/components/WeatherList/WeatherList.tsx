@@ -38,17 +38,15 @@ export const WeatherList: React.FC = () => {
           {currentCity?.name}
         </div>
         <ul className={listClass}>
-          {cityList.map((city) => {
-            return (
-              <li
-                className={styles['item']}
-                key={city}
-                onClick={() => handleOnClick(city)}
-              >
-                {city}
-              </li>
-            );
-          })}
+          {cityList.map((city) => (
+            <li
+              className={styles['item']}
+              key={city}
+              onClick={() => handleOnClick(city)}
+            >
+              {city}
+            </li>
+          ))}
         </ul>
       </div>
     </>
